@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/clock.css" />
+  <link rel="stylesheet" href="css/land.css" />
+  <link rel="stylesheet" href="css/below.css" />
+  <link rel="stylesheet" href="css/modal.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>page one</title>
+</head>
+
+<body>
+  <nav class="navContainer">
+    <section>
+      <h1 class="navTitle">TheGame</h1>
+    </section>
+
+    <div class="clock">
+      <div class="hour">
+        <div class="hr" id="hr"></div>
+      </div>
+      <div class="min">
+        <div class="mn" id="mn"></div>
+      </div>
+      <div class="sec">
+        <div class="sc" id="sc"></div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="appContainer">
+
+    <section class="landContainer">
+
+      <button class="land" data-level="1">
+        <img src="images/gz.jpg">
+        <span>壹</span>
+      </button>
+      <button class="land" data-level="2">
+        <img src="images/sz.jpg">
+        <span>贰</span>
+      </button>
+      <button class="land" data-level="3">
+        <img src="images/zh.jpg">
+        <span>叁</span>
+      </button>
+      <button class="land" data-level="4">
+        <img src="images/fs.jpg">
+        <span>肆</span>
+      </button>
+      <button class="land" data-level="5">
+        <img src="images/hz.jpg">
+        <span>伍</span>
+      </button>
+      <button class="land" data-level="6">
+        <img src="images/dg.jpg">
+        <span>陆</span>
+      </button>
+      <button class="land" data-level="7">
+        <img src="images/zs.jpg">
+        <span>柒</span>
+      </button>
+      <button class="land" data-level="8">
+        <img src="images/jm.jpg">
+        <span>捌</span>
+      </button>
+      <button class="land" data-level="9">
+        <img src="images/zq.jpg">
+        <span>玖</span>
+      </button>
+      <button class="land" data-level="10">
+        <img src="images/eat.jpg">
+        <span>拾</span>
+      </button>
+    </section>
+  </section>
+
+  <section class="below">
+    <section class="footer">
+      <section class="footerText">From:WMYJ NJU</section>
+      <section class="footerText">恭喜發財</section>
+    </section>
+      <img src="images/below.png" class="belowPhoto">
+  </section>
+
+
+  <!--弹窗-->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close">&times;</span>
+        <div class="modal-title"></div>
+      </div>
+      <div class="modal-body">
+        <button id="btn_enter" class="modal-choose">开始</button>
+        <button id="btn_cancel" class="modal-choose">取消</button>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="script/clock.js"></script>
+  <script src="script/landScroll.js"></script>
+  <script src="script/modal.js"></script>
+  <script src="script/lock.js"></script>
+
+</body>
+
+</html>

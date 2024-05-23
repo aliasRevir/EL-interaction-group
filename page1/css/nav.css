@@ -1,0 +1,16 @@
+/* nav */
+.navContainer {
+    padding: var(--m) var(--m);
+    background-color: var(--purple);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navTitle {
+    color: var(--white);
+    font-size: 30px;
+    margin: 0;
+    font-weight: normal;
+}

@@ -1,0 +1,22 @@
+:root {
+    --primary: #396dff;
+    --purple: #700ab4;
+    --white: #f8f3f3;
+
+    --xs: 4px;
+    --s: 8px;
+    --m: 16px;
+    --l: 24px;
+    --xl: 48px;
+}
+
+body {
+    margin: 0;
+}
+
+.appContainer {
+    height: auto;
+    background-color: antiquewhite;
+    padding: var(--s) var(--m);
+    margin: auto;
+}

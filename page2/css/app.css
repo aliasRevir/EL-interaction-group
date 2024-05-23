@@ -1,0 +1,136 @@
+@font-face {
+  font-family: "FZCuJinLing";
+  src: url('../font/FZCuJinLJW.ttf') format('truetype');
+  /* the url starts with "../" cuz we are at "./font" */
+}
+
+body{
+    margin: 0px;
+}
+
+nav{
+    /* TBD: 完全不知道搞点啥 */
+    margin: 10px;
+    background-color: #44aaff; /* TBD */
+}
+
+.appContainer{
+    margin: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    display: -webkit-flex; /* safari */
+}
+
+.subboxCol{
+    border: 1px dashed black; /* TBD */
+    flex: 1;
+    height: 800px;
+    background: #ffeeee; /* TBD */
+}
+
+.boxHint{
+    font-size: 40px;
+    font-family: "FZCuJinLing";
+}
+
+.boxQA{
+    display: flex;
+    flex-direction: column;
+}
+
+.subboxQA{
+    border: 1px solid black; /* TBD */
+    border-radius: 0px; /* TBD */
+    background-color: #aaccff; /* TBD */
+    /*user-select: none;*/
+
+    padding: 20px;
+    line-height: 300%;
+}
+
+.boxQuestion{
+    flex: 1;
+}
+
+.boxAnswer{
+    flex: 1.5;
+}
+
+.boxToolbar{
+    flex: 0.25;
+    padding: 0px;
+    display: flex;
+    flex-direction: row;
+}
+
+.subboxToolbar{
+    flex: 1;
+    border: 0px solid black;
+    background-color: #ffaa22;
+
+    font-size: 30px;
+    font-family: "FZCuJinLing";
+
+    &:hover {
+        background-color: #ffee77;
+    }
+
+    &:disabled {
+        color: #d2d5db;
+        background-color: #6c7589;
+    }
+}
+
+.statement{
+    font-size: 40px;
+    font-family: "FZCuJinLing";
+}
+
+.statement_blank{
+    margin: 0px 5px 0px 5px;
+    padding: 0px 10px 5px 10px;
+
+    display: inline-block;
+    min-width: 80px;
+    height: 40px; /* set to font size */
+
+    text-align: center;
+
+    border: 2px dashed #000000;
+    border-radius: 12px;
+}
+
+.option_btn{
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    background-color: #44bb55;
+    color: white;
+    border: none;
+    border-radius: 12px;
+
+    font-size: 40px;
+    font-family: "FZCuJinLing";
+    
+    display: inline-block;
+    text-align: center;
+
+    -webkit-transition-duration: 0.2s; /* Safari */
+    transition-duration: 0.2s;
+
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.12);
+
+    &:hover {
+        background-color: #bbdd55;
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    }
+
+    &:disabled {
+        color: #dddddd;
+        background-color: #666666;
+    }
+}
+
+

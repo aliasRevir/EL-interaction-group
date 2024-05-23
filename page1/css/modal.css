@@ -1,0 +1,101 @@
+/* modal */
+/* 弹窗容器 */
+.modal {
+    display: none;
+    /* 初始状态为隐藏 */
+    position: fixed;
+    /* 相对于视口定位 */
+    z-index: 1;
+    /* 确保弹窗在内容之上 */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* 覆盖整个视口宽度 */
+    height: 100%;
+    /* 覆盖整个视口高度 */
+    overflow: auto;
+    /* 允许内容滚动 */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* 黑色背景，半透明 */
+}
+
+/* 弹窗内容 */
+.modal-content {
+    background-color: #fefefe;
+    margin: 0;
+    /* 移除默认的margin */
+    padding: 2px;
+    /* 添加一些内边距 */
+    border: 1px solid #888;
+    width: 100%;
+    /* 弹窗内容的宽度 */
+    max-width: 600px;
+    /* 限制最大宽度，避免在小屏幕上过大 */
+    position: relative;
+    /* 相对于自身定位 */
+    top: 50%;
+    /* 将顶部定位到视口中心 */
+    left: 50%;
+    /* 将左侧定位到视口中心 */
+    transform: translate(-50%, -50%);
+    /* 将弹窗的中心点移动到视口的中心 */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+}
+
+/* 其余样式保持不变 */
+
+/* 添加动画 */
+@keyframes animatetop {
+    from {
+        transform: translate(-50%, -300px);
+        /* 从页面中心向上偏移 */
+        opacity: 0;
+    }
+
+    to {
+        transform: translate(-50%, -50%);
+        /* 移动到页面中心 */
+        opacity: 1;
+    }
+}
+
+/* 关闭按钮 */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: var(--purple);
+    color: white;
+}
+
+.modal-body {
+    padding: 2px 16px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.modal-choose {
+    margin: var(--l) var(--xl);
+    padding: var(--s) var(--l);
+    font-size: 55px;
+}
+
+.modal-title {
+    font-size: 30px;
+}
