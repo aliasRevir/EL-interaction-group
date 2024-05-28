@@ -11,7 +11,9 @@
 function submit(answers) {
     console.log("submit(answers) answers = " + answers);
 }
-
+function logInfo(...data) {
+    console.log(data);
+}
 
 
 /*  - interface -  */
@@ -21,143 +23,83 @@ function initPage(problem) {
     feController.init(problem);
 }
 
-class BlankFillingStatement {
-    // boolean isBlank
-    // string content
-    constructor(isBlank, content) {
-        this.isBlank = isBlank;
-        this.content = content;    
-    }
+class wordBlank{
+    wordList;
 }
 
-class BlankFillingProblem {
-    // BlankFillingStatement[] statements;
-    // string[] options
-    // ;
-    // int blankCount;
-    // int[] answers; // kth blank has option a_k
-    constructor(statements, options) {
-        this.statements = statements;
-        this.options = options;
-        this.blankCount = 0;
-        this.fillCount = 0;
-        this.answers = [];
-        for (var id = 0; id < statements.length; id++) {
-            if (statements[id].isBlank) this.blankCount ++;
-        }
-    }
-    addAnswer(id) {
-        // string answer
-        if (this.answers.length == this.blankCount) {
-        //  feController
-        } else {
-            this.answers.push(id);
-            feController.updateBlank(this.answers.length - 1, this.options[id]);
-            feController.updateOption(id, 0);
-        }
-    }
-    deleteAnswer() {
-        if (this.answers.length == 0) {
-            console.log("deleteAnswer(): failed cuz len = 0\n");
-        } else {
-            var id = this.answers[this.answers.length - 1];
-            this.answers.pop();
-            feController.updateBlank(this.answers.length, "");
-            feController.updateOption(id, 1);
-        }
-    }
-    submitAnswer() {
-        if (this.answers.length == this.blankCount) {
-            submit(this.answers);
-        }
-    }
+class problem {
+    type;             //int 题型
+    description;      //string 题面
+    descriptionSound; //type(1-3) : string src路径 type(4):null(这个题型没声音)
+    wordCount;        //int 选项数量
+    wordList;         //string [] 选项名字
+    wordSoundList;    //string [] src路径(与wordList一一对应)
+    answer;           //string 答案
 }
 
 
 class feController {
+    static thisProblem;
+    static thisWordBlank;
     static init(problem) {
+        logInfo("init(", problem, ")");
         ; // BlankFillingProblem problem
-        thisProblem = problem;
-        this.showStatement(problem.statements);
-        this.showOption(problem.options);
-        this.addManyListener();
+        this.thisProblem = problem;
+        this.clear();
+        if(this.thisProblem.description != undefined) this.showDescription(this.thisProblem.description);
+        this.showWordList(this.thisProblem.wordList);
     }
-    static showStatement(statements) {
-        ; // BlankFillingStatement[] statements
-        var blank_id = 0;
-        for (var id = 0; id < statements.length; id++) {
-            this.showStatementSingle(statements[id], blank_id);
-            if (statements[id].isBlank) {
-                blank_id ++;
-            }
+    static clear() {
+        this.thisWordBlank = new wordBlank;
+        // tbd
+        document.querySelector(".boxDescription").innerText = "";
+        document.querySelector(".boxAnswer").innerHTML = ""
+    }
+    static showDescription(statements) {
+        document.querySelector(".boxDescription").innerText = statements;
+    }
+    static showWordList(wordList) {
+        logInfo("showWordList(", wordList, ")");
+        for (var id = 0; id < wordList.length; id++) {
+            this.showWordListSingle(wordList[id], id);
         }
     }
-    static showStatementSingle(statement, id) {
-        var tempDOM = document.createElement("span");
-        if (statement.isBlank == true) {
-            tempDOM.className = "statement statement_blank";
-            tempDOM.id = "blank_" + id;
-            tempDOM.innerText = "　";
-        } else {
-            tempDOM.className = "statement";
-            tempDOM.innerText = statement.content;
-        }
-        document.querySelector(".boxQuestion").append(tempDOM);
-    }
-    static showOption(options) {
-        ; // String[] options
-        for (var id = 0; id < options.length; id++) {
-            this.showOptionSingle(options[id], id);
-        }
-    }
-    static showOptionSingle(option, id) {
+    static showWordListSingle(option, id) {
+        logInfo("showWordListSingle(", option, id, ")");
         ; // string option
         ; // int id
-        var tempDOM=document.createElement("button");
+        var tempDOM = document.createElement("button");
         tempDOM.className = "option_btn";
         tempDOM.innerText = option;
         tempDOM.id = "btn_" + id;
         document.querySelector(".boxAnswer").append(tempDOM);
         document.getElementById(tempDOM.id).addEventListener("click", function() {
-            thisProblem.addAnswer(id);
+            feController.addAnswer(id);
+            feController.updateOption(id, false);
         }, true);
     }
-    static addManyListener() {
-        document.querySelector("#btnUndo").addEventListener("click", function() {
-            thisProblem.deleteAnswer();
-        }, true);
-        document.querySelector("#btnSubmit").addEventListener("click", function() {
-            thisProblem.submitAnswer();
+    static addAnswer(id) {
+        logInfo("addAnswer(", id, ")");
+        var tempDOM = document.createElement("button");
+        tempDOM.className = "statement statement_blank";
+        tempDOM.innerText = this.thisProblem.wordList[id];
+        tempDOM.id = "state_" + id;
+        document.querySelector(".boxQuestion").append(tempDOM);
+        this.playOptionSound(id);
+        document.getElementById(tempDOM.id).addEventListener("click", function() {
+            feController.deleteAnswer(id);
+            feController.updateOption(id, true);
         }, true);
     }
-    static updateBlank(id, val) {
-        console.log(id + " val = " + val);
-        if (val == "") val = "　";
-        document.querySelector("#blank_" + id).innerText = val;
+    static deleteAnswer(id) {
+        logInfo("deleteAnswer(", id, ")");
+        document.querySelector("#state_" + id).remove();
     }
     static updateOption(id, val) {
         document.querySelector("#btn_" + id).disabled = val ? false : true;
     }
+    static playOptionSound(id) {
+        var music = new Audio(this.thisProblem.wordSoundList[id]);
+        music.play();
+    }
 }
-
-var thisProblem;
-
-
-
-
-
-
-
-
-
-/* */
-
-tmp1 = new BlankFillingStatement(false, "在对照实验中，控制自变量可以采用")
-tmp2 = new BlankFillingStatement(true, "")
-tmp3 = new BlankFillingStatement(false, "或")
-tmp4 = new BlankFillingStatement(true, "")
-tmp5 = new BlankFillingStatement(false, "。")
-
-var curProb = new BlankFillingProblem([tmp1, tmp2, tmp3, tmp4, tmp5], ["加法原理", "减法原理", "乘法原理", "除法原理"]);
-
-initPage(curProb);

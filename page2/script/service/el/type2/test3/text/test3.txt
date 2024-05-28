@@ -1,0 +1,4 @@
+putonghua:喂!三点多啦,干干干,干啥干,喝茶先吧
+yueyu:喂! 三点几啦,做做做,做咩做,饮茶先啦
+yueyusound:wai3 saam1 dim2 gei2 laa1 zou6 zou6 zou6 zou6 me1 zou6 jam3 caa4 sin1 laa1
+wordlist:[喂, 三点多啦, 干干干, 干啥干, 喝茶先吧]

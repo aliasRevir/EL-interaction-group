@@ -1,0 +1,4 @@
+putonghua:做人什么都可以输，信心一定不可以输！
+yueyu:做人咩都可以輸，信心唔可以輸！
+yueyusound:zou6 jan4 me1 dou1 ho2 ji5 syu1 seon3 sam1 m4 ho2 ji5 syu1
+wordlist:[做人, 什么, 都, 可以, 输, 信心, 一定, 不可以, 输]
