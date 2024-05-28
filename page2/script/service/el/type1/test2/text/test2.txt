@@ -1,4 +1,4 @@
-putong:早上好,我喝普洱,谢谢
-yueyu:早晨,我飲普洱,唔該
+putong:早上好，我喝普洱，谢谢
+yueyu:早晨我飲普洱唔該
 wordlist:[早晨, 我, 飲, 普洱, 唔該]
 soundlist:[zou2 san4, ngo5, jam2, pou2 ji5, m4 goi1]

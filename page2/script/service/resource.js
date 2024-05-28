@@ -70,4 +70,3 @@ class resource {
 /*submit.addEventListener("click", check);*/
 
 resource.getProblem(1);
-

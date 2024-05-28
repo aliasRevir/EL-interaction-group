@@ -1,4 +1,4 @@
-putong:早上好,请问喝什么茶
-yueyu:早晨,請問飲咩茶
+putong:早上好，请问喝什么茶
+yueyu:早晨請問飲咩茶
 wordlist:[早晨, 請問, 飲, 咩, 茶]
 soundlist:[zou2 san4, ceng2 man6, jam2, me1, caa4]
