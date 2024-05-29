@@ -1,0 +1,4 @@
+putong:做人如果没有梦想，这样跟一条咸鱼有什么分别呢？
+yueyu:做人如果冇梦想咁同條咸鱼有咩分别
+wordlist:[做人, 如果, 冇, 梦想, 咁, 同條咸鱼, 有咩, 分别, 唔该, 有]
+soundlist:[zuo6 jan4, jyu4 gwo2, mou5, mung6 soeng2, gam3, tung tiu4 haam4 jyu4, jau6 me1, fan1 bit6, m4 goi1, jau6]

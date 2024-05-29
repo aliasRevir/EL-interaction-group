@@ -1,0 +1,5 @@
+putonghua:你不再爱我你只会记得我
+yueyu:你唔再爱我，你只会记得我。
+yueyucharacter:[你, 唔, 再, 爱, 我, ，, 你, 只, 会, 记, 得, 我, 。]
+yueyusound:[nei5, m4, zoi3, oi3, ngo5,  , nei5, zek3, wui6, gei3, dak1, ngo5, ]
+wordlist:[你, 不再, 爱, 我, 你, 只会, 记得, 我, 不记得, 不爱, 也不会]

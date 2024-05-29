@@ -1,0 +1,5 @@
+putonghua:我不会忘记你但我不会想念你
+yueyu:我唔会忘记你，但我唔会挂住你！
+yueyucharacter:[我,唔,会, 忘, 记, 你, ，, 但, 我, 唔, 会, 挂, 住, 你, ！]
+yueyusound:[ngo5, m4, wui6, mong4, gei3, nei5,  , daan6, ngo5, m4, wui6, gwaa3, zyu6, nei5, ]
+wordlist:[我, 不会, 忘记, 你, 但, 我, 不会, 想念, 你, 会, 虽然, 我]

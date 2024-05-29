@@ -1,0 +1,3 @@
+putonghua:我真是不想理
+yueyu:我真系无眼睇
+wordlist:[我, 真是, 不想, 理, 真不是, 想]

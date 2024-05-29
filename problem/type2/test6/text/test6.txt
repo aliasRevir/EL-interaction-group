@@ -1,0 +1,5 @@
+putonghua:明明有空调吊把风扇在中间用来上吊吗
+yueyu:明明有冷气，吊把风扇响中间，吊颈咩？
+yueyucharacter:[明, 明, 有, 冷, 气, ，, 吊, 把, 风, 扇, 响, 中, 间, ，, 吊, 颈, 咩, ？]
+yueyusound:[ming4, ming4, jau6, laang5, hei3,  , diu3, baa2, fung1, sin3, hoeng2, zung1, gaan3,  , diu3, geng2, me1,  ]
+wordlist:[明明, 有, 空调, 吊, 把, 风扇, 在, 中间, 用来, 上吊, 吗, 没有, 冷库]

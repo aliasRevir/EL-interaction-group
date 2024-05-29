@@ -1,0 +1,4 @@
+putong:我读书少，你不要骗我
+yueyu:我读得书少你唔好呃我
+wordlist:[我, 读得书, 少, 你, 唔好, 呃, 我, 我, 你, 唔该]
+soundlist:[ngo5, duk6 dak1 syu1, siu3, nei5, m4 hou3, ak1, ngo5, ngo5, nei5, m4 goi1]

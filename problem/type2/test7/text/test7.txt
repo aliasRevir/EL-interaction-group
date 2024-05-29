@@ -1,0 +1,5 @@
+putonghua:我没有理由留下你只能真心地祝福你
+yueyu:我冇理由留低你，只好真心咁祝福你。
+yueyucharacter:[我, 冇, 理, 由, 留, 低, 你, ，, 只, 好, 真, 心, 咁, 祝, 福, 你, 。]
+yueyusound:[ngo5, mou5, lei5, jau4, lau4, dai1, nei5,  , zek3, hou3, zan1, sam1, gam3, zuk1, fuk1, nei5, ]
+wordlist:[我, 没有, 理由, 留下, 你, 只能, 真心地, 祝福, 你, 不能, 虚假]

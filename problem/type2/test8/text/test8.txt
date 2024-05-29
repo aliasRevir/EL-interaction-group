@@ -1,0 +1,5 @@
+putonghua:在对的时候遇到对的人是一种幸福在对的时候遇到错的人是一种悲哀
+yueyu:喺啱嘅时候遇见啱嘅人系一种幸福，喺啱嘅时候遇见错嘅人系一种悲哀。
+yueyucharacter:[喺, 啱, 嘅, 时, 候, 遇, 见, 啱, 嘅, 人, 系, 一, 种, 幸, 福, ，, 喺, 啱, 嘅, 时, 候, 遇, 见, 错, 嘅, 人, 系, 一, 种, 悲, 哀, 。]
+yueyusound:[hai2, aam1, ge3, si4, hau6, jyu6, gin3, aam1, ge3, jan4, hai6, jat1, zung2, hang6, fuk1,  , hai2, aam1, ge3, si4, hau6, jyu6, gin3, co3, ge3, jan4, hai6, jat1, zung2, bei1, oi1, ]
+wordlist:[在, 对的, 时候, 遇到, 对的, 人, 是, 一种, 幸福, 在, 对的, 时候, 遇到, 错的, 人, 是, 一种, 悲哀, 不在, 错过]

@@ -1,0 +1,4 @@
+putong:来人，关门，放狗！
+yueyu:人嚟落闸放狗
+wordlist:[人嚟, 落闸, 放狗, 来人, 够, 放]
+soundlist:[jan4 lai4, lok6 zaap6, fong3 gau2, loi4 jan4, gau3, fong3]
