@@ -1,0 +1,4 @@
+putong:一人一支可乐，见一次打一次。
+yueyu:一人一枝可乐见一镬打一镬
+wordlist:[一人, 一枝, 可乐, 见一镬, 打一镬, 唔该, 我]
+soundlist:[jat1 jan4, jat1 zi1, ho2 lok6, gin3 jat1 wok6, daa2 jat1 wok6, m4 goi1, ngo5]

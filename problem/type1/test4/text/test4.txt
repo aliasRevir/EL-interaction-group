@@ -1,0 +1,4 @@
+putong:出来混，总是要还的。
+yueyu:出嚟行预咗要还
+wordlist:[出嚟行, 预咗, 要还, 有还, 我]
+soundlist:[ceot1 lai4 hong4, jyu6 zo2, jiu3 waan4, jau6 waan4, ngo5]

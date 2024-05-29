@@ -1,0 +1,5 @@
+putonghua:我们不会忘记过去但亦不会思念过去
+yueyu:我哋唔会忘记过去，但亦唔会想念过去。
+yueyucharacter:[我, 哋, 唔, 会, 忘, 记, 过, 去, ，, 但, 亦, 唔, 会, 想, 念, 过, 去, 。]
+yueyusound:[ngo5, dei6, m4, wui6, mong4, gei3, gwo3, heoi3, , daan6, jik6, m4, wui6, soeng2, nim6, gwo3, heoi3, ]
+wordlist:[我们, 不会, 忘记, 过去, 但, 亦不会, 思念, 过去, 你, 会, 亦会]

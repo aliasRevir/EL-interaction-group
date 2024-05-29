@@ -1,0 +1,5 @@
+putonghua:在错的时候遇到对的人是一声叹息在错的时候遇到错的人是一份无奈
+yueyu:喺错嘅时候遇见啱嘅人系一声叹息，喺错嘅时候遇见错嘅人系一份无奈。
+yueyucharacter:[喺, 错, 嘅, 时, 候, 遇, 见, 啱, 嘅, 人, 系, 一, 声, 叹, 息, ，, 喺, 错, 嘅, 时, 候, 遇, 见, 错, 嘅, 人, 系, 一, 份, 无, 奈, 。]
+yueyusound:[hai2, co3, ge3, si4, hau6, jyu6, gin3, aam1, ge3, jan4, hai6, jat1, sing1, taan3, sik1,  ,hai2, co3, ge3, si4, hau6, jyu6, gin3, co3, ge3, jan4, hai6, jat1, fan6, mou4, noi6, ]
+wordlist:[在, 错的, 时候, 遇到, 对的, 人, 是, 一声, 叹息, 在, 错的, 时候, 遇到, 错的, 人, 是, 一份, 无奈, 不在, 交错, 错过]

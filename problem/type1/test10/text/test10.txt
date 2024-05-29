@@ -1,0 +1,4 @@
+putong:你饿不饿啊，我煮碗面给你吃啊？
+yueyu:你饿唔饿啊我煮碗麵俾你食啊
+wordlist:[你, 饿唔饿啊, 我, 煮碗麵, 俾你, 食, 啊, 主, 是, 我]
+soundlist:[nei5, ngo6 m4 ngo6 aa1, ngo5, zyu2 wun2 min6, bei2 nei5, sik6, aa1, zyu2, si6, ngo5]

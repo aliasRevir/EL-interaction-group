@@ -1,0 +1,4 @@
+putong:对不起，我是警察。
+yueyu:对唔住我系差人
+wordlist:[对唔住, 我, 系, 差人, 唔该, 你]
+soundlist:[deoi3 m4 zyu6, ngo5, hai6, caa1 jan4, m4 goi1, nei5]
