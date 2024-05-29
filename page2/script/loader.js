@@ -1,12 +1,4 @@
-
-// you can use:
-// function initPage(BlankFillingProgram program);
-
-
-
-
-// you should implement:
-// function submit(int[] answers);
+// include before resource.js
 
 function logInfo(...data) {
     console.log(data);
@@ -39,6 +31,7 @@ class problem {
 class feController {
     static thisProblem;
     static thisWordBlank;
+    static isStaticButtonInitialized;
     static init(problem) {
         logInfo("init(", problem, ")");
         ; // BlankFillingProblem problem
@@ -47,15 +40,17 @@ class feController {
         if(this.thisProblem.description != undefined) this.showStatement(this.thisProblem.description);
         this.showOptionList(this.thisProblem.wordList);
 
-        this.attachListener();
+        if(!this.isStaticButtonInitialized) this.attachListener();
     }
     static clear() {
         logInfo("clear()");
-        this.beClearAnswer();
-        // tbd
-        document.querySelector(".boxStatement").innerHTML = "";
-        document.querySelector(".boxAnswer").innerHTML = "";
+        document.querySelector(".statementContainer").innerHTML = "";
+        this.clearAnswer();
         document.querySelector(".boxOption").innerHTML = "";
+    }
+    static clearAnswer() {
+        this.beClearAnswer();
+        document.querySelector(".boxAnswer").innerHTML = "";
     }
     static showStatement(statements) {
         logInfo("showStatement(", statements, ")");
@@ -63,11 +58,11 @@ class feController {
             for (let i = 0; i < this.thisProblem.descriptionTokenized.length; i++) {
                 var word = this.thisProblem.descriptionTokenized[i];
                 var wordipa = this.thisProblem.descriptionIPA[i];
-                document.querySelector(".boxStatement").innerHTML += "<span class='statementToken'><span class='statementIPA'>" + wordipa + "</span><span class='statementText'>" + word + "</span></span>";
+                document.querySelector(".statementContainer").innerHTML += "<span class='statementToken'><span class='statementIPA'>" + wordipa + "</span><span class='statementText'>" + word + "</span></span>";
                 
             }
         } else {
-            document.querySelector(".boxStatement").innerText = statements;
+            document.querySelector(".statementContainer").innerText = statements;
         }
     }
     static showOptionList(wordList) {
@@ -120,10 +115,26 @@ class feController {
         var music = new Audio(this.thisProblem.wordSoundList[id]);
         music.play();
     }
+    static playStatementSound(id) {
+        var music = new Audio(this.thisProblem.descriptionSound);
+        music.play();
+    }
 
     static attachListener() {
+        this.isStaticButtonInitialized = true;
         document.getElementById("btnSubmit").addEventListener("click", function() {
             feController.submitAnswer();
+        }, true);
+        document.getElementById("btnClear").addEventListener("click", function() {
+            for (let i = 0; i < feController.thisProblem.wordList.length; i++) {
+                document.getElementById("btn_" + i).disabled = false;
+            }
+            feController.clearAnswer();
+        }, true);
+        document.querySelector(".statementContainer").addEventListener("click", function(){
+            if (feController.isHaveStatementSound()) {
+                feController.playStatementSound();
+            }
         }, true);
     }
 
@@ -153,6 +164,13 @@ class feController {
         if (this.thisProblem.type == 1) return true;
         if (this.thisProblem.type == 2) return false;
         if (this.thisProblem.type == 3) return false;
+        if (this.thisProblem.type == 4) return false;
+    }
+
+    static isHaveStatementSound() {
+        if (this.thisProblem.type == 1) return false;
+        if (this.thisProblem.type == 2) return true;
+        if (this.thisProblem.type == 3) return true;
         if (this.thisProblem.type == 4) return false;
     }
 

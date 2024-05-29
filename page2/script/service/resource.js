@@ -127,4 +127,4 @@ class resource {
 
 /*submit.addEventListener("click", check);*/
 
-resource.getProblem(7);
+resource.getProblem(1);
