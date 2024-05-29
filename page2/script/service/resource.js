@@ -1,5 +1,5 @@
 const pathSeparator = "/";
-const pathPreffix = "." + pathSeparator + "script" + pathSeparator + "service" + pathSeparator + "el";
+const pathPreffix = ".." + pathSeparator + "problem";
 
 
 class resource {
@@ -25,10 +25,9 @@ class resource {
     输入：id:int题目编号(1 - 8)
     返回：problem对象
     */
-    static getProblem(id) {
+    static getProblem(type, id) {
+        logInfo("getProblem()", type, id);
         id = String(id);
-        console.log(id);
-        var type = Math.floor((id-1) / 2) + 1;
         var textName = pathPreffix + pathSeparator + "type" + String(type) + pathSeparator + "test" + id + pathSeparator + "text" + pathSeparator + "test" + id + ".txt"
         const pbl = new problem();
         fetch(textName).then(response => {
@@ -127,4 +126,9 @@ class resource {
 
 /*submit.addEventListener("click", check);*/
 
-resource.getProblem(1);
+
+{
+var lvstt = strToArr(localStorage.getItem("levelStat"));
+var cur_id = parseInt(localStorage.getItem("levelProgress"));
+resource.getProblem(lvstt[cur_id][0],lvstt[cur_id][1]);
+}

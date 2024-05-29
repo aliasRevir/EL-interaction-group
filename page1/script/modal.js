@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
         btn_enter.onclick = function () {
           localStorage.setItem("onProcess", process);
 
-          var url = "./new.html";
+          var url = "../page2";
           window.location.href = url;
         };
       }

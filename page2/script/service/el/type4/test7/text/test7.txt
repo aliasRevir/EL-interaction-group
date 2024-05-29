@@ -1,2 +1,0 @@
-putonghuawordlist:[早上好, 晚安, 没关系, 对不起, 没问题]
-yueyuwordlist:[早晨, 早唞, 冇乜关系, 对唔住, 冇问题]
