@@ -3,6 +3,23 @@ const pathPreffix = "." + pathSeparator + "script" + pathSeparator + "service" +
 
 
 class resource {
+
+    static trimAll(strArray) {
+      for (var i = 0; i < strArray.length; i++) {
+        strArray[i] = strArray[i].trim();
+      }
+      return strArray;
+    }
+    static concatAll(strArray) {
+      var ret = "";
+      for (var i = 0; i < strArray.length; i++) {
+        ret += strArray[i];
+      }
+      return ret;
+    }
+    static getList(str) {
+      return this.trimAll(str.split(':')[1].replace('[', '').replace(']', '').split(","));
+    }
     /*
     getProblem
     输入：id:int题目编号(1 - 8)
@@ -21,30 +38,71 @@ class resource {
             return response.text();
           })
           .then(data => {
-            console.log("data: " + data);
-            pbl.type = type;
-            data = data.split("\r");
-            if (type != 4) {
-              pbl.descriptionSound = pathPreffix + pathSeparator + "type" + String(type) + pathSeparator + "test" + id + pathSeparator + "sound" + pathSeparator + "test" + id + ".mp3"
-              pbl.description = data[0].split(':')[1];
-              pbl.answer = data[1].split(':')[1].replace(',', '');
-              pbl.wordList = data[2].split(':')[1].replace('[', '').replace(']', '').split(',');
-            } else {
-              pbl.descriptionSound = null;
-              pbl.description = data[0].split(':')[1].replace('[', '').replace(']', '').split(',');
-              pbl.wordList = data[1].split(':')[1].replace('[', '').replace(']', '').split(',');
-              pbl.answer = data[1].split(':')[1].replace('[', '').replace(']', '');
-            }
-            for (let index = 0; index < pbl.wordList.length; index++) {
-              pbl.wordList[index] = pbl.wordList[index].trim();
-            }
+            console.log("data: ", data);
 
-            pbl.wordCount = pbl.wordList.length;
-            pbl.wordSoundList = [];
-            for (var i = 0; i < pbl.wordCount; i++) {
+            pbl.type = type;
+
+            // delete whitespace
+            data = this.trimAll(data.split("\n"));
+
+            // 其实我觉得这个格式设计的还是不咋地
+            // 应该统一一下，题面就是题面，选项就是选项，只是题面和选项都有可选音频
+            // 。。。不管了
+
+            if (type == 1) {
+              pbl.description      = data[0].split(':')[1];
+              pbl.descriptionSound = pathPreffix + pathSeparator + "type" + String(type) + pathSeparator + "test" + id + pathSeparator + "sound" + pathSeparator + "test" + id + ".mp3";
+
+              pbl.descriptionTokenized = null;
+              pbl.descriptionIPA       = null;
+
+              pbl.wordList      = this.getList(data[2]);
+              pbl.wordIPAList   = this.getList(data[3]);
+              pbl.wordSoundList = [];
+              for (var i = 0; i < pbl.wordList.length; i++) {
                 pbl.wordSoundList.push(pathPreffix + pathSeparator + "type" + String(type) + pathSeparator + "test" + id + pathSeparator + "sound" + pathSeparator + "wordlist_sound" + pathSeparator +
                   "word" + String(i + 1) + ".mp3")
+              }
+              pbl.answer        = data[1].split(':')[1];
             }
+            if (type == 2) {
+              pbl.description      = data[1].split(':')[1];
+              pbl.descriptionSound = pathPreffix + pathSeparator + "type" + String(type) + pathSeparator + "test" + id + pathSeparator + "sound" + pathSeparator + "test" + id + ".mp3";
+
+              pbl.descriptionTokenized = this.getList(data[2]);
+              pbl.descriptionIPA       = this.getList(data[3]);
+
+              pbl.wordList      = this.getList(data[4]);
+              pbl.wordIPAList   = null;
+              pbl.wordSoundList = null;
+              pbl.answer        = this.getList(data[0]);
+            }
+            if (type == 3) {
+              pbl.description      = data[1].split(':')[1];
+              pbl.descriptionSound = pathPreffix + pathSeparator + "type" + String(type) + pathSeparator + "test" + id + pathSeparator + "sound" + pathSeparator + "test" + id + ".mp3";
+
+              pbl.descriptionTokenized = null;
+              pbl.descriptionIPA       = null;
+
+              pbl.wordList      = this.getList(data[2]);
+              pbl.wordIPAList   = null;
+              pbl.wordSoundList = null;
+              pbl.answer        = this.getList(data[0]);
+            }
+
+            if (type == 4) {
+              pbl.description      = this.getList(data[0]);
+              pbl.descriptionSound = null;
+
+              pbl.descriptionTokenized = null;
+              pbl.descriptionIPA       = null;
+
+              pbl.wordList      = this.getList(data[1]);
+              pbl.wordIPAList   = null;
+              pbl.wordSoundList = null;
+              pbl.answer        = this.concatAll(this.getList(data[1]));
+            }
+
             console.log(pbl);
             feController.init(pbl);
           /*
@@ -60,7 +118,7 @@ class resource {
             return pbl;
           })
           .catch(error => {
-            console.log("error fetch?");
+            console.log(error, "error fetch?");
           //  test.textContent = error.message;//实际用的时候改一下这里
           });
     }
@@ -69,4 +127,4 @@ class resource {
 
 /*submit.addEventListener("click", check);*/
 
-resource.getProblem(1);
+resource.getProblem(7);

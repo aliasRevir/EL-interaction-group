@@ -25,24 +25,24 @@ nav{
     display: -webkit-flex; /* safari */
 }
 
-.subboxCol{
+.subboxApp{
     border: 1px dashed black; /* TBD */
     flex: 1;
     height: 800px;
     background: #ffeeee; /* TBD */
 }
 
-.boxDescription{
+.boxStatement{
     font-size: 40px;
-    font-family: "FZCuJinLing";
+    font-family: "GenWanMin";
 }
 
-.boxQA{
+.boxAO{
     display: flex;
     flex-direction: column;
 }
 
-.subboxQA{
+.subboxAO{
     border: 1px solid black; /* TBD */
     border-radius: 0px; /* TBD */
     background-color: #aaccff; /* TBD */
@@ -52,11 +52,11 @@ nav{
     line-height: 300%;
 }
 
-.boxQuestion{
+.boxAnswer{
     flex: 1;
 }
 
-.boxAnswer{
+.boxOption{
     flex: 1.5;
 }
 
@@ -73,7 +73,7 @@ nav{
     background-color: #ffaa22;
 
     font-size: 30px;
-    font-family: "FZCuJinLing";
+    font-family: "GenWanMin";
 
     &:hover {
         background-color: #ffee77;
@@ -85,18 +85,16 @@ nav{
     }
 }
 
-.statement{
-    font-size: 40px;
-    font-family: "GenWanMin";
-}
-
-.statement_blank{
+.answer{
     margin: 0px 5px 0px 5px;
     padding: 0px 10px 5px 10px;
 
     display: inline-block;
     /* min-width: 80px; */
     height: 45px; /* set to font size + 5px */
+
+    font-size: 40px;
+    font-family: "GenWanMin";
 
     text-align: center;
 
@@ -137,4 +135,37 @@ nav{
     }
 }
 
+.optionIPA {
+    display: flex;
+    flex-direction: column;
+    flex: 0.5;
+    font-size: 18px;
+}
 
+.optionText {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.statementToken {
+    font-size: 40px;
+    font-family: "GenWanMin";
+    
+    display: inline-block;
+    text-align: center;
+}
+
+
+.statementIPA {
+    display: flex;
+    flex-direction: column;
+    flex: 0.5;
+    font-size: 15px;
+}
+
+.statementText {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
