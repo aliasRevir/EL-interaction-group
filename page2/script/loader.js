@@ -8,9 +8,6 @@
 // you should implement:
 // function submit(int[] answers);
 
-function submit(answers) {
-    console.log("submit(answers) answers = " + answers);
-}
 function logInfo(...data) {
     console.log(data);
 }
@@ -21,10 +18,6 @@ function logInfo(...data) {
 function initPage(problem) {
     ; // BlankFillingProblem problem
     feController.init(problem);
-}
-
-class wordBlank{
-    wordList;
 }
 
 class problem {
@@ -42,6 +35,7 @@ class problem {
 }
 
 
+
 class feController {
     static thisProblem;
     static thisWordBlank;
@@ -52,10 +46,12 @@ class feController {
         this.clear();
         if(this.thisProblem.description != undefined) this.showStatement(this.thisProblem.description);
         this.showOptionList(this.thisProblem.wordList);
+
+        this.attachListener();
     }
     static clear() {
         logInfo("clear()");
-        this.thisWordBlank = new wordBlank;
+        this.beClearAnswer();
         // tbd
         document.querySelector(".boxStatement").innerHTML = "";
         document.querySelector(".boxAnswer").innerHTML = "";
@@ -100,6 +96,7 @@ class feController {
     }
     static addAnswer(id) {
         logInfo("addAnswer(", id, ")");
+        this.beAddAnswer(this.thisProblem.wordList[id]);
         var tempDOM = document.createElement("button");
         tempDOM.className = "answer";
         tempDOM.innerText = this.thisProblem.wordList[id];
@@ -113,6 +110,7 @@ class feController {
     }
     static deleteAnswer(id) {
         logInfo("deleteAnswer(", id, ")");
+        this.beDeleteAnswer(this.thisProblem.wordList[id]);
         document.querySelector("#state_" + id).remove();
     }
     static updateOption(id, val) {
@@ -121,6 +119,20 @@ class feController {
     static playOptionSound(id) {
         var music = new Audio(this.thisProblem.wordSoundList[id]);
         music.play();
+    }
+
+    static attachListener() {
+        document.getElementById("btnSubmit").addEventListener("click", function() {
+            feController.submitAnswer();
+        }, true);
+    }
+
+    static submitAnswer() {
+        if (feController.checkAnswer() == true) {
+            logInfo("OK you win");
+        } else {
+            logInfo("OK you lose hahah");
+        }
     }
 
     static isRenderOptionIPA() {
@@ -142,6 +154,29 @@ class feController {
         if (this.thisProblem.type == 2) return false;
         if (this.thisProblem.type == 3) return false;
         if (this.thisProblem.type == 4) return false;
+    }
+
+    static beClearAnswer() {
+        this.thisWordBlank = Array();
+    }
+
+    static beAddAnswer(word) {
+        this.thisWordBlank.push(word);
+    }
+
+    static beDeleteAnswer(word) {
+        this.thisWordBlank = this.thisWordBlank.filter(name => {return name != word});
+        // 选项互不相同
+    }
+
+
+    static checkAnswer() {
+        var ret = "";
+        for (let i = 0; i < this.thisWordBlank.length; i++) {
+            ret += this.thisWordBlank[i];
+        }
+        if (ret == this.thisProblem.answer) return true;
+        else return false;
     }
 }
 
