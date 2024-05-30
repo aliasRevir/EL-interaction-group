@@ -1,5 +1,5 @@
 putonghua:不如我们从头来过
 yueyu:不如我哋由头来过。
 yueyucharacter:[不, 如, 我, 哋, 由, 头, 来, 过, 。]
-yueyusound:[bat1, jyu4, ngo5, dei6, jau4, loi4, gwo3, ]
+yueyusound:[bat1, jyu4, ngo5, dei6, jau4, tau4, loi4, gwo3, ]
 wordlist:[不如, 我们, 从头, 来过, 你们, 过来]
