@@ -35,6 +35,29 @@ function strToArr (str) {
     return ret;
 }
 
+function getRandomizedPermutation (len) {
+    
+    logInfo("getRandomizedPermutation()", len);
+    arr = Array();
+    for (let i = 0; i < len; i++) {
+        arr.push(i);
+    }
+    for (var i = arr.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
+function shuffleWithGivenOrder (arr, order) {
+    logInfo("shuffleWithGivenOrder()", arr, order);
+    ret = Array();
+    for (let i = 0; i < arr.length; i++) {
+        ret.push(arr[order[i]]);
+    }
+    return ret;
+}
+
 if (localStorage.getItem("onProcess") == undefined) { localStorage.setItem("onProcess", 1); }
 if (localStorage.getItem("maxProcess") == undefined) { localStorage.setItem("maxProcess", 1); }
 localStorage.setItem("levelStat", arrToStr(levels[localStorage.getItem("onProcess") - 1]));
@@ -73,6 +96,8 @@ class feController {
         this.thisProblem = problem;
         this.clear();
         if(this.thisProblem.description != undefined) this.showStatement(this.thisProblem.description);
+
+        this.shuffleOptionList();
         this.showOptionList(this.thisProblem.wordList);
 
         if(!this.isStaticButtonInitialized) this.attachListener();
@@ -85,11 +110,11 @@ class feController {
     }
     static clearAnswer() {
         this.beClearAnswer();
-        document.querySelector(".boxAnswer").innerHTML = "";
+        document.querySelector(".answerContainer").innerHTML = "";
     }
     static showStatement(statements) {
         logInfo("showStatement()", statements);
-        if (this.isRenderStatementIPA()) {
+        if (this.isHaveStatementIPA()) {
             for (let i = 0; i < this.thisProblem.descriptionTokenized.length; i++) {
                 var word = this.thisProblem.descriptionTokenized[i];
                 var wordipa = this.thisProblem.descriptionIPA[i];
@@ -98,6 +123,16 @@ class feController {
             }
         } else {
             document.querySelector(".statementContainer").innerText = statements;
+        }
+    }
+    static shuffleOptionList() {
+        var ord = getRandomizedPermutation(this.thisProblem.wordList.length);
+        this.thisProblem.wordList = shuffleWithGivenOrder(this.thisProblem.wordList, ord);
+        if (this.isHaveOptionIPA()) {
+            this.thisProblem.wordIPAList = shuffleWithGivenOrder(this.thisProblem.wordIPAList, ord);
+        }
+        if (this.isHaveOptionSound()) {
+            this.thisProblem.wordSoundList = shuffleWithGivenOrder(this.thisProblem.wordSoundList, ord);
         }
     }
     static showOptionList(wordList) {
@@ -111,7 +146,7 @@ class feController {
         ; // string option
         ; // int id
         var tempDOM = document.createElement("button");
-        if (this.isRenderOptionIPA()) {
+        if (this.isHaveOptionIPA()) {
             tempDOM.innerHTML = "<span class='optionIPA'>" + this.thisProblem.wordIPAList[id] + "</span><span class='optionText'>" + option + "</span>";
         } else {
             tempDOM.innerHTML = "<span class='optionText'>" + option + "</span>";
@@ -131,7 +166,7 @@ class feController {
         tempDOM.className = "answer";
         tempDOM.innerText = this.thisProblem.wordList[id];
         tempDOM.id = "state_" + id;
-        document.querySelector(".boxAnswer").append(tempDOM);
+        document.querySelector(".answerContainer").append(tempDOM);
         if (this.isHaveOptionSound()) this.playOptionSound(id);
         document.getElementById(tempDOM.id).addEventListener("click", function() {
             feController.deleteAnswer(id);
@@ -199,14 +234,14 @@ class feController {
         }
     }
 
-    static isRenderOptionIPA() {
+    static isHaveOptionIPA() {
         if (this.thisProblem.type == 1) return true;
         if (this.thisProblem.type == 2) return false;
         if (this.thisProblem.type == 3) return false;
         if (this.thisProblem.type == 4) return false;
     }
 
-    static isRenderStatementIPA() {
+    static isHaveStatementIPA() {
         if (this.thisProblem.type == 1) return false;
         if (this.thisProblem.type == 2) return true;
         if (this.thisProblem.type == 3) return false;
