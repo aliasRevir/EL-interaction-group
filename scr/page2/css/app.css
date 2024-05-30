@@ -37,6 +37,23 @@ body{
     font-weight: normal;
 }
 
+.navLife{
+    display: inline-flex;
+    justify-content: center;
+}
+
+.navLifeIcon{
+    width: 20%;
+    display: block;
+}
+
+.navLifeText{
+    color: white;
+    font-size: 30px;
+    margin: 10px 30px;
+    font-weight: normal;
+}
+
 .navMessage{
     color: white;
     font-size: 30px;
