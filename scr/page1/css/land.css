@@ -29,6 +29,7 @@
 }
 
 .land {
+    flex-basis: 30%;
     flex-shrink: 0;
     overflow: hidden;
     transition: .5s;
@@ -37,7 +38,6 @@
     border-radius: 20px;
     border: 10px solid #fff;
     background-color: #fff;
-    width: 30%;
     text-align: center;
 }
 
@@ -57,13 +57,42 @@
     align-items: center;
 }
 
+@keyframes slidein {
+    from {
+        flex-basis: 30%;
+    }
+    to {
+        flex-basis: 40%;
+    }
+}
+
 
 .land.unlocked:hover {
-    flex-basis: 50%;
-} 
+    
+    flex-basis: 40%;
+    
+    animation-duration: 0.2s;
+    animation-name: slidein;
+    animation-iteration-count: 1;
+    animation-direction: alternate;
+}
+
+@keyframes growup {
+    from {
+        width: 200%;
+    }
+    to {
+        width: 100%;
+    }
+}
 
 .land.unlocked:hover>img {
     width: 100%;
+    
+    animation-duration: 0.2s;
+    animation-name: growup;
+    animation-iteration-count: 1;
+    animation-direction: alternate;
 }
 
 .land.locked {
