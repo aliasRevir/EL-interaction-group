@@ -45,7 +45,7 @@ body{
 }
 
 .appContainer{
-    margin: 0px;
+    min-height: max-content;
     display: flex;
     flex-wrap: wrap;
     display: -webkit-flex; /* safari */
@@ -55,7 +55,7 @@ body{
 .subboxApp{
     border: 1px dashed black; /* TBD */
     flex: 1;
-    height: 800px;
+    min-height: 900px;
     background: #ffeeee; /* TBD */
 }
 
@@ -78,38 +78,64 @@ body{
 }
 
 
-#sendVal {
-    width: 100%;
-    height: auto;
-    justify-content: space-around;
-    margin: 5px 15px;
+#ai_io_range {
+    width: 95%;
+    height: 50px;
+    margin: auto;
+    /*justify-content: space-around;*/
+    display: flex;
 }
 
-#sendVal #question {
-    width: 70%;
-    height: 90%;
+#ai_input {
+    flex: 5;
     border: 2px dotted blue;
+
+    font-size: 25px;
+    font-family: "GenWanMin";
 }
 
-#sendVal #btn {
-    width: 20%;
-    height: 100%;
+#ai_btn {
+    font-size: 25px;
+    font-family: "GenWanMin";
+
+    flex: 1;
     background-color: #5D7CFF;
 }
 
-#results {
-    width: 100%;
-    height: 100%;
-}
+#ai_result {
+    width: 95%;
+    height: 345.337px;
 
-#results #result {
     align-self: center;
-    width: 92%;
-    height: 90%;
     margin: 10px 15px;
+
+    overflow-y: scroll;
 
     background-color: #E2EEFF;
     white-space: pre-line;
+}
+
+.dialog_single {
+    font-size: 20px;
+    font-family: "GenWanMin";
+}
+
+.dialog_single_man {
+    color: #ff6f3c;
+}
+
+.dialog_single_man::before {
+    color: #1e2022;
+    content: '用户：';
+}
+
+.dialog_single_AI {
+    color: #52616b;
+}
+
+.dialog_single_AI::before {
+    color: #1e2022;
+    content: 'AI：';
 }
 
 .boxAO{
@@ -123,7 +149,6 @@ body{
     background-color: #aaccff; /* TBD */
     /*user-select: none;*/
 
-    padding: 20px;
     line-height: 300%;
 }
 
@@ -133,6 +158,8 @@ body{
 
 .boxOption{
     flex: 1.5;
+
+    padding: 20px;
 }
 
 .boxToolbar{
@@ -267,7 +294,7 @@ body{
     background-color: #ffdfbc;
     position:relative;
 }
-
+/*
 .statementContainer::after, .answerContainer::after{
     display:block;
     content: '';
@@ -279,4 +306,4 @@ body{
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
     border-top: 15px solid #ffdfbc;
-}
+}*/
