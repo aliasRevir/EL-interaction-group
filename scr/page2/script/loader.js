@@ -125,6 +125,7 @@ localStorage.setItem(
   arrToStr(levels[localStorage.getItem("onProcess") - 1])
 );
 localStorage.setItem("levelProgress", 0);
+localStorage.setItem("life", 5);
 
 /*  - interface -  */
 
@@ -154,6 +155,7 @@ class feController {
   static init(problem) {
     logInfo("init()", problem); // BlankFillingProblem problem
     this.getMessage();
+    this.count_life();
     this.thisProblem = problem;
     this.clear();
     if (this.thisProblem.description != undefined) {
@@ -172,105 +174,133 @@ class feController {
 
     this.loadAllSound();
 
-        if(!this.isStaticButtonInitialized) this.attachListener();
+    if (!this.isStaticButtonInitialized) this.attachListener();
+  }
+  static getMessage() {
+    var message = document.querySelector(".navMessage");
+    var lev = localStorage.getItem("onProcess");
+    var step = parseInt(localStorage.getItem("levelProgress")) + 1;
+    message.innerText = "关卡" + lev + " 第" + step + "题";
+  }
+  static count_life() {
+    var life = document.querySelector(".navLifeText");
+    life.innerText = localStorage.getItem("life");
+  }
+  static clear() {
+    logInfo("clear()");
+    document.querySelector(".statementContainer").innerHTML = "";
+    this.clearAnswer();
+    document.querySelector(".boxOption").innerHTML = "";
+    document.getElementById("ai_result").innerHTML = "";
+  }
+  static clearAnswer() {
+    this.beClearAnswer();
+    document.querySelector(".answerContainer").innerHTML = "";
+  }
+  static showStatement(statements) {
+    logInfo("showStatement()", statements);
+    if (this.isHaveStatementIPA()) {
+      for (let i = 0; i < this.thisProblem.descriptionTokenized.length; i++) {
+        var word = this.thisProblem.descriptionTokenized[i];
+        var wordipa = this.thisProblem.descriptionIPA[i];
+        document.querySelector(".statementContainer").innerHTML +=
+          "<span class='statementToken'><span class='statementIPA'>" +
+          wordipa +
+          "</span><span class='statementText'>" +
+          word +
+          "</span></span>";
+      }
+    } else {
+      document.querySelector(".statementContainer").innerText = statements;
     }
-    static getMessage() {
-      var message = document.querySelector(".navMessage");
-      var lev = localStorage.getItem("onProcess");
-      var step = parseInt(localStorage.getItem("levelProgress")) + 1;
-      message.innerText = "关卡" + lev + " 第" + step + "题";
+  }
+  static shuffleOptionList() {
+    var ord = getRandomizedPermutation(this.thisProblem.wordList.length);
+    this.thisProblem.wordList = shuffleWithGivenOrder(
+      this.thisProblem.wordList,
+      ord
+    );
+    if (this.isHaveOptionIPA()) {
+      this.thisProblem.wordIPAList = shuffleWithGivenOrder(
+        this.thisProblem.wordIPAList,
+        ord
+      );
     }
-    static clear() {
-        logInfo("clear()");
-        document.querySelector(".statementContainer").innerHTML = "";
-        this.clearAnswer();
-        document.querySelector(".boxOption").innerHTML = "";
-        document.getElementById("ai_result").innerHTML = "";
+    if (this.isHaveOptionSound()) {
+      this.thisProblem.wordSoundList = shuffleWithGivenOrder(
+        this.thisProblem.wordSoundList,
+        ord
+      );
     }
-    static clearAnswer() {
-        this.beClearAnswer();
-        document.querySelector(".answerContainer").innerHTML = "";
+  }
+  static showOptionList(wordList) {
+    logInfo("showOptionList()", wordList);
+    for (var id = 0; id < wordList.length; id++) {
+      this.showOptionListSingle(wordList[id], id);
     }
-    static showStatement(statements) {
-        logInfo("showStatement()", statements);
-        if (this.isHaveStatementIPA()) {
-            for (let i = 0; i < this.thisProblem.descriptionTokenized.length; i++) {
-                var word = this.thisProblem.descriptionTokenized[i];
-                var wordipa = this.thisProblem.descriptionIPA[i];
-                document.querySelector(".statementContainer").innerHTML += "<span class='statementToken'><span class='statementIPA'>" + wordipa + "</span><span class='statementText'>" + word + "</span></span>";
-                
-            }
-        } else {
-            document.querySelector(".statementContainer").innerText = statements;
-        }
+  }
+  static showOptionListSingle(option, id) {
+    logInfo("showOptionListSingle()", option, id); // string option // int id
+    var tempDOM = document.createElement("button");
+    if (this.isHaveOptionIPA()) {
+      tempDOM.innerHTML =
+        "<span class='optionIPA'>" +
+        this.thisProblem.wordIPAList[id] +
+        "</span><span class='optionText'>" +
+        option +
+        "</span>";
+    } else {
+      tempDOM.innerHTML = "<span class='optionText'>" + option + "</span>";
     }
-    static shuffleOptionList() {
-        var ord = getRandomizedPermutation(this.thisProblem.wordList.length);
-        this.thisProblem.wordList = shuffleWithGivenOrder(this.thisProblem.wordList, ord);
-        if (this.isHaveOptionIPA()) {
-            this.thisProblem.wordIPAList = shuffleWithGivenOrder(this.thisProblem.wordIPAList, ord);
-        }
-        if (this.isHaveOptionSound()) {
-            this.thisProblem.wordSoundList = shuffleWithGivenOrder(this.thisProblem.wordSoundList, ord);
-        }
-    }
-    static showOptionList(wordList) {
-        logInfo("showOptionList()", wordList);
-        for (var id = 0; id < wordList.length; id++) {
-            this.showOptionListSingle(wordList[id], id);
-        }
-    }
-    static showOptionListSingle(option, id) {
-        logInfo("showOptionListSingle()", option, id);
-        ; // string option
-        ; // int id
-        var tempDOM = document.createElement("button");
-        if (this.isHaveOptionIPA()) {
-            tempDOM.innerHTML = "<span class='optionIPA'>" + this.thisProblem.wordIPAList[id] + "</span><span class='optionText'>" + option + "</span>";
-        } else {
-            tempDOM.innerHTML = "<span class='optionText'>" + option + "</span>";
-        }
-        tempDOM.className = "option_btn";
-        tempDOM.id = "btn_" + id;
-        document.querySelector(".boxOption").append(tempDOM);
-        document.getElementById(tempDOM.id).addEventListener("click", function() {
-            feController.addAnswer(id);
-            feController.updateOption(id, false);
-        }, true);
-    }
-    static addAnswer(id) {
-        logInfo("addAnswer()", id);
-        this.beAddAnswer(Array(this.thisProblem.wordList[id], id));
-        var tempDOM = document.createElement("button");
-        tempDOM.className = "answer";
-        tempDOM.innerText = this.thisProblem.wordList[id];
-        tempDOM.id = "state_" + id;
-        document.querySelector(".answerContainer").append(tempDOM);
-        if (this.isHaveOptionSound()) this.playOptionSound(id);
-        document.getElementById(tempDOM.id).addEventListener("click", function() {
-            feController.deleteAnswer(id);
-            feController.updateOption(id, true);
-        }, true);
-    }
-    static deleteAnswer(id) {
-        logInfo("deleteAnswer()", id);
-        this.beDeleteAnswer(Array(this.thisProblem.wordList[id], id));
-        document.querySelector("#state_" + id).remove();
-    }
-    static updateOption(id, val) {
-        logInfo("updateOption()", id, val);
-        document.querySelector("#btn_" + id).disabled = val ? false : true;
-    }
-    static playOptionSound(id) {
-        logInfo("playOptionSound()", id);
-        var music = new Audio(this.thisProblem.wordSoundList[id]);
-        music.play();
-    }
-    static playStatementSound() {
-        logInfo("playStatementSound()");
-        var music = new Audio(this.thisProblem.descriptionSound);
-        music.play();
-    }
+    tempDOM.className = "option_btn";
+    tempDOM.id = "btn_" + id;
+    document.querySelector(".boxOption").append(tempDOM);
+    document.getElementById(tempDOM.id).addEventListener(
+      "click",
+      function () {
+        feController.addAnswer(id);
+        feController.updateOption(id, false);
+      },
+      true
+    );
+  }
+  static addAnswer(id) {
+    logInfo("addAnswer()", id);
+    this.beAddAnswer(Array(this.thisProblem.wordList[id], id));
+    var tempDOM = document.createElement("button");
+    tempDOM.className = "answer";
+    tempDOM.innerText = this.thisProblem.wordList[id];
+    tempDOM.id = "state_" + id;
+    document.querySelector(".answerContainer").append(tempDOM);
+    if (this.isHaveOptionSound()) this.playOptionSound(id);
+    document.getElementById(tempDOM.id).addEventListener(
+      "click",
+      function () {
+        feController.deleteAnswer(id);
+        feController.updateOption(id, true);
+      },
+      true
+    );
+  }
+  static deleteAnswer(id) {
+    logInfo("deleteAnswer()", id);
+    this.beDeleteAnswer(Array(this.thisProblem.wordList[id], id));
+    document.querySelector("#state_" + id).remove();
+  }
+  static updateOption(id, val) {
+    logInfo("updateOption()", id, val);
+    document.querySelector("#btn_" + id).disabled = val ? false : true;
+  }
+  static playOptionSound(id) {
+    logInfo("playOptionSound()", id);
+    var music = new Audio(this.thisProblem.wordSoundList[id]);
+    music.play();
+  }
+  static playStatementSound() {
+    logInfo("playStatementSound()");
+    var music = new Audio(this.thisProblem.descriptionSound);
+    music.play();
+  }
 
     static loadAllSound() {
         if (this.isHaveOptionSound()) {
@@ -313,30 +343,34 @@ class feController {
         }, true);
     }
 
-    static askAI(msg) {
-        queryAI(msg, document.getElementById("ai_result"),
-            (dom)=>{
-                console.log('go!');
-                feController.showDialogSingle(msg, false);
-                feController.showDialogSingle('', true);
-            },
-            (dom, str)=>{
-                var tmp = document.querySelectorAll(".dialog_single_AI");
-                tmp[tmp.length - 1].innerText += str;
-            },
-            ()=>{console.log('finish!')}
-        );
-    }
+  static askAI(msg) {
+    queryAI(
+      msg,
+      document.getElementById("ai_result"),
+      (dom) => {
+        console.log("go!");
+        feController.showDialogSingle(msg, false);
+        feController.showDialogSingle("", true);
+      },
+      (dom, str) => {
+        var tmp = document.querySelectorAll(".dialog_single_AI");
+        tmp[tmp.length - 1].innerText += str;
+      },
+      () => {
+        console.log("finish!");
+      }
+    );
+  }
 
-    static showDialogSingle(msg, isAI) {
-        var tempDOM = document.createElement("div");
-        tempDOM.className = "dialog_single ";
-        tempDOM.innerText = msg;
-        if (isAI) tempDOM.className += "dialog_single_AI";
-        else tempDOM.className += "dialog_single_man";
+  static showDialogSingle(msg, isAI) {
+    var tempDOM = document.createElement("div");
+    tempDOM.className = "dialog_single ";
+    tempDOM.innerText = msg;
+    if (isAI) tempDOM.className += "dialog_single_AI";
+    else tempDOM.className += "dialog_single_man";
 
-        document.getElementById("ai_result").appendChild(tempDOM);
-    }
+    document.getElementById("ai_result").appendChild(tempDOM);
+  }
 
   static submitAnswer() {
     if (feController.beCheckAnswer() == true) {
@@ -364,6 +398,8 @@ class feController {
       }
     } else {
       logInfo("OK you lose hahah");
+      localStorage.setItem("life", parseInt(localStorage.getItem("life")) - 1);
+      feController.count_life();
     }
   }
 
