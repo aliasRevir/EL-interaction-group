@@ -434,7 +434,7 @@ class feController {
     if (this.thisProblem.type == 1) return false;
     if (this.thisProblem.type == 2) return true;
     if (this.thisProblem.type == 3) return true;
-    if (this.thisProblem.type == 4) return false;
+    if (this.thisProblem.type == 4) return true;
   }
 
   static beClearAnswer() {

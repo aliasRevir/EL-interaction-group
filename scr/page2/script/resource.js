@@ -91,7 +91,7 @@ class resource {
 
             if (type == 4) {
               pbl.description      = this.getList(data[0]);
-              pbl.descriptionSound = null;
+              pbl.descriptionSound = pathPreffix + pathSeparator + "type" + String(type) + pathSeparator + "test" + id + pathSeparator + "sound" + pathSeparator + "test" + id + ".mp3";
 
               pbl.descriptionTokenized = null;
               pbl.descriptionIPA       = null;
