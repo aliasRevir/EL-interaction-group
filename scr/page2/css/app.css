@@ -307,3 +307,13 @@ body{
     border-right: 15px solid transparent;
     border-top: 15px solid #ffdfbc;
 }*/
+
+.playStatementSound {
+    background-color: transparent;
+    
+    border: 3px solid;
+    border-radius: 12px;
+    text-align:center;
+
+    display: inline-block;
+}
