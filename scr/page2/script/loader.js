@@ -106,6 +106,8 @@ class feController {
         this.shuffleOptionList();
         this.showOptionList(this.thisProblem.wordList);
 
+        this.loadAllSound();
+
         if(!this.isStaticButtonInitialized) this.attachListener();
     }
     static clear() {
@@ -197,6 +199,17 @@ class feController {
         logInfo("playStatementSound()");
         var music = new Audio(this.thisProblem.descriptionSound);
         music.play();
+    }
+
+    static loadAllSound() {
+        if (this.isHaveOptionSound()) {
+            for (var i = 0; i < this.thisProblem.wordSoundList.length; i++) {
+                var tmp = new Audio(this.thisProblem.wordSoundList[i]);
+            }
+        }
+        if (this.isHaveStatementSound()) {
+            var tmp = new Audio(this.thisProblem.descriptionSound);
+        }
     }
 
     static attachListener() {

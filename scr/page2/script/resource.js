@@ -132,3 +132,7 @@ var lvstt = strToArr(localStorage.getItem("levelStat"));
 var cur_id = parseInt(localStorage.getItem("levelProgress"));
 resource.getProblem(lvstt[cur_id][0],lvstt[cur_id][1]);
 }
+
+function hack() {
+  ;
+}
