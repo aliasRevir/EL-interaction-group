@@ -12,7 +12,9 @@
   <link rel="stylesheet" href="css/app.css">
   <script src="script/loader.js" type="text/javascript" defer="defer"></script>
   <script src="script/resource.js" type="text/javascript" defer="defer"></script>
-  <script type="module" src="../../main.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script defer src="./script/ai.js"></script>
 </head>
 
 <body>
@@ -30,8 +32,8 @@
       <div class="xinghuo">
         <div>提问大模型助手(粤语调教版)</div>
         <div id="sendVal">
-          <input id="question" type="text">
-          <button id="btn">提问</button>
+          <input id="ai_question" type="text">
+          <button id="ai_btn">提问</button>
         </div>
 
         <div id="results">
