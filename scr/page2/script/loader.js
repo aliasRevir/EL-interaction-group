@@ -381,7 +381,7 @@ class feController {
     var modalTitleElement = document.querySelector(".modal-title");
     var modalTitleElement1 = document.querySelector(".modal-title1");
 
-    if (feController.checkAnswer() == true) {
+    if (feController.beCheckAnswer() == true) {
       logInfo("OK you win");
       if (true) {
         var lvstt = strToArr(localStorage.getItem("levelStat"));
