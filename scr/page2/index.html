@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="css/app.css">
   <script src="script/loader.js" type="text/javascript" defer="defer"></script>
   <script src="script/resource.js" type="text/javascript" defer="defer"></script>
+  <script type="module" src="../../main.js"></script>
 </head>
 
 <body>
@@ -24,9 +25,22 @@
   <main class="appContainer">
     <div class="subboxApp boxStatement">
       <div class="statementContainer">
-
+      </div>
+      <div class="xinghuo">
+        <div>提问大模型助手(粤语调教版)</div>
+        <div id="sendVal">
+          <input id="question" type="text">
+          <button id="btn">提问</button>
+        </div>
+    
+        <div id="results">
+          <textarea id="result"></textarea>
+        </div>
+    
       </div>
     </div>
+
+
     <div class="subboxApp boxAO">
       <div class="subboxAO boxAnswer">
         <div class="answerContainer">

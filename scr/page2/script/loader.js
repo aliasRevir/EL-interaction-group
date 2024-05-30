@@ -226,7 +226,7 @@ class feController {
                         localStorage.setItem("maxProcess", parseInt(localStorage.getItem("onProcess")) + 1);
                     }
                     // jump back.
-                    window.location.href = "../page1";
+                    window.location.href = "../page1/index.html";
                 }
             }
         } else {
