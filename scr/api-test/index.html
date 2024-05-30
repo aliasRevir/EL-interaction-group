@@ -13,17 +13,18 @@
 </head>
 
 <body>
-    <div class="QA-item-ft-cont">
-        <div class="QA-item-ft-info">
+    <div>
+        <div>
             <textarea id="search_text"></textarea>
         </div>
-        <div class="QA-item-ft-btn">
-            <a onclick="aisendmsg()" class="btn blue-bg search_btn">
+        <div>
+            <button onclick="aisendmsg()">
                 发送
-            </a>
+            </button>
         </div>
-        <div class="result">
-            
+        <div class="ai_status">
+        </div>
+        <div class="ai_result">
         </div>
     </div>
     
@@ -40,6 +41,7 @@
         }
         reqcontent = reqcontent;
         OpenWebsocket();
+        $(".ai_status").text("在请求了喵");
     }
     //开启websocket
 
@@ -76,7 +78,9 @@ function OpenWebsocket() {
 
             if (status != 2) {
                 console.log("received (stat != 2)", json);
-                $(".result").text($(".result").text() + json.payload.choices.text[0].content);
+                // append result
+                $(".ai_status").text("");
+                $(".ai_result").text($(".ai_result").text() + json.payload.choices.text[0].content);
             }
             else {
                 console.log("received (stat == 2)", json);
