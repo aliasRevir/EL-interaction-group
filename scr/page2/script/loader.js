@@ -158,8 +158,16 @@ class feController {
     this.count_life();
     this.thisProblem = problem;
     this.clear();
-    if (this.thisProblem.description != undefined)
-      this.showStatement(this.thisProblem.description);
+    if (this.thisProblem.description != undefined) {
+        this.showStatement(this.thisProblem.description);
+    }
+
+    if (feController.isHaveStatementSound()) {
+        document.querySelector(".statementContainer").innerHTML += "<button class='playStatementSound'><img src='./img/speaker.png' width='40' height='40'/></button>";
+        document.querySelector(".playStatementSound").addEventListener("click", function(){
+            feController.playStatementSound();
+        }, true);
+    }
 
     this.shuffleOptionList();
     this.showOptionList(this.thisProblem.wordList);
@@ -258,7 +266,7 @@ class feController {
   }
   static addAnswer(id) {
     logInfo("addAnswer()", id);
-    this.beAddAnswer(this.thisProblem.wordList[id]);
+    this.beAddAnswer(Array(this.thisProblem.wordList[id], id));
     var tempDOM = document.createElement("button");
     tempDOM.className = "answer";
     tempDOM.innerText = this.thisProblem.wordList[id];
@@ -276,7 +284,7 @@ class feController {
   }
   static deleteAnswer(id) {
     logInfo("deleteAnswer()", id);
-    this.beDeleteAnswer(this.thisProblem.wordList[id]);
+    this.beDeleteAnswer(Array(this.thisProblem.wordList[id], id));
     document.querySelector("#state_" + id).remove();
   }
   static updateOption(id, val) {
@@ -294,60 +302,46 @@ class feController {
     music.play();
   }
 
-  static loadAllSound() {
-    if (this.isHaveOptionSound()) {
-      for (var i = 0; i < this.thisProblem.wordSoundList.length; i++) {
-        var tmp = new Audio(this.thisProblem.wordSoundList[i]);
-      }
+    static loadAllSound() {
+        if (this.isHaveOptionSound()) {
+            for (var i = 0; i < this.thisProblem.wordSoundList.length; i++) {
+                var tmp = new Audio(this.thisProblem.wordSoundList[i]);
+            }
+        }
+        if (this.isHaveStatementSound()) {
+            var tmp = new Audio(this.thisProblem.descriptionSound);
+        }
     }
-    if (this.isHaveStatementSound()) {
-      var tmp = new Audio(this.thisProblem.descriptionSound);
-    }
-  }
 
-  static attachListener() {
-    this.isStaticButtonInitialized = true;
-    document.getElementById("btnSubmit").addEventListener(
-      "click",
-      function () {
-        feController.submitAnswer();
-      },
-      true
-    );
-    document.getElementById("btnClear").addEventListener(
-      "click",
-      function () {
-        for (let i = 0; i < feController.thisProblem.wordList.length; i++) {
-          document.getElementById("btn_" + i).disabled = false;
-        }
-        feController.clearAnswer();
-      },
-      true
-    );
-    document.querySelector(".statementContainer").addEventListener(
-      "click",
-      function () {
-        if (feController.isHaveStatementSound()) {
-          feController.playStatementSound();
-        }
-      },
-      true
-    );
-    document.querySelector(".navSubContainer").addEventListener(
-      "click",
-      function () {
-        window.location.href = "../page1/index.html";
-      },
-      true
-    );
-    document.getElementById("ai_btn").addEventListener(
-      "click",
-      function () {
-        feController.askAI(document.getElementById("ai_input").value);
-      },
-      true
-    );
-  }
+    static attachListener() {
+        this.isStaticButtonInitialized = true;
+        document.getElementById("btnSubmit").addEventListener("click", function() {
+            feController.submitAnswer();
+        }, true);
+        document.getElementById("btnClear").addEventListener("click", function() {
+            for (let i = 0; i < feController.thisProblem.wordList.length; i++) {
+                document.getElementById("btn_" + i).disabled = false;
+            }
+            feController.clearAnswer();
+        }, true);
+        /*
+        document.querySelector(".statementContainer").addEventListener("click", function(){
+            if (feController.isHaveStatementSound()) {
+                feController.playStatementSound();
+            }
+        }, true);
+        */
+        document.querySelector(".navSubContainer").addEventListener(
+            "click",
+            function () {
+              window.location.href = "../page1/index.html";
+            },
+            true
+          );
+          document.getElementById("ai_btn").addEventListener("click", function() {
+            feController.askAI(document.getElementById("ai_input").value);
+        }, true);
+    }
 
   static askAI(msg) {
     queryAI(
@@ -480,28 +474,30 @@ class feController {
     if (this.thisProblem.type == 1) return false;
     if (this.thisProblem.type == 2) return true;
     if (this.thisProblem.type == 3) return true;
-    if (this.thisProblem.type == 4) return false;
+    if (this.thisProblem.type == 4) return true;
   }
 
   static beClearAnswer() {
     this.thisWordBlank = Array();
   }
 
-  static beAddAnswer(word) {
-    this.thisWordBlank.push(word);
+  static beAddAnswer(wordArr) {
+    this.thisWordBlank.push(wordArr);
   }
 
-  static beDeleteAnswer(word) {
+  static beDeleteAnswer(wordArr) {
     this.thisWordBlank = this.thisWordBlank.filter((name) => {
-      return name != word;
+      console.log(name, wordArr, (name != wordArr), ((name[0] != wordArr[0]) || (name[1] != wordArr[1])));
+      return (name[0] != wordArr[0]) || (name[1] != wordArr[1]);
     });
     // 选项互不相同
   }
 
-  static checkAnswer() {
+
+  static beCheckAnswer() {
     var ret = "";
     for (let i = 0; i < this.thisWordBlank.length; i++) {
-      ret += this.thisWordBlank[i];
+      ret += this.thisWordBlank[i][0];
     }
     if (ret == this.thisProblem.answer) return true;
     else return false;

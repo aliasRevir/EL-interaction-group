@@ -403,3 +403,13 @@ body{
 .modal-title1 {
     font-size: 30px;
 }
+
+.playStatementSound {
+    background-color: transparent;
+    
+    border: 3px solid;
+    border-radius: 12px;
+    text-align:center;
+
+    display: inline-block;
+}
