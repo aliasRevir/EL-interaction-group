@@ -76,14 +76,16 @@ function OpenWebsocket() {
             var status = json.payload.choices.status;
             var content = json.payload.choices.text[0].content
 
+            // append result
+            $(".ai_result").text($(".ai_result").text() + json.payload.choices.text[0].content);
+
             if (status != 2) {
                 console.log("received (stat != 2)", json);
-                // append result
-                $(".ai_status").text("");
-                $(".ai_result").text($(".ai_result").text() + json.payload.choices.text[0].content);
+                $(".ai_status").text("接收中");
             }
             else {
                 console.log("received (stat == 2)", json);
+                $(".ai_status").text("接受完了");
             }
         } else {
             console.log("received (code != 0)", json);
