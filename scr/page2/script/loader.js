@@ -115,6 +115,7 @@ class feController {
         document.querySelector(".statementContainer").innerHTML = "";
         this.clearAnswer();
         document.querySelector(".boxOption").innerHTML = "";
+        document.getElementById("ai_result").innerHTML = "";
     }
     static clearAnswer() {
         this.beClearAnswer();
@@ -228,6 +229,34 @@ class feController {
                 feController.playStatementSound();
             }
         }, true);
+        document.getElementById("ai_btn").addEventListener("click", function() {
+            feController.askAI(document.getElementById("ai_input").value);
+        }, true);
+    }
+    
+    static askAI(msg) {
+        queryAI(msg, document.getElementById("ai_result"),
+            (dom)=>{
+                console.log('go!');
+                feController.showDialogSingle(msg, false);
+                feController.showDialogSingle('', true);
+            },
+            (dom, str)=>{
+                var tmp = document.querySelectorAll(".dialog_single_AI");
+                tmp[tmp.length - 1].innerText += str;
+            },
+            ()=>{console.log('finish!')}
+        );
+    }
+
+    static showDialogSingle(msg, isAI) {
+        var tempDOM = document.createElement("div");
+        tempDOM.className = "dialog_single ";
+        tempDOM.innerText = msg;
+        if (isAI) tempDOM.className += "dialog_single_AI";
+        else tempDOM.className += "dialog_single_man";
+
+        document.getElementById("ai_result").appendChild(tempDOM);
     }
 
     static submitAnswer() {
