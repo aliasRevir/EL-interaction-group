@@ -77,7 +77,7 @@ class resource {
               pbl.answer        = this.getList(data[0]);
             }
             if (type == 3) {
-              pbl.description      = data[1].split(':')[1];
+              pbl.description      = "句子听力题(点击题面播放音频)"//data[1].split(':')[1];
               pbl.descriptionSound = pathPreffix + pathSeparator + "type" + String(type) + pathSeparator + "test" + id + pathSeparator + "sound" + pathSeparator + "test" + id + ".mp3";
 
               pbl.descriptionTokenized = null;
@@ -90,7 +90,7 @@ class resource {
             }
 
             if (type == 4) {
-              pbl.description      = this.getList(data[0]);
+              pbl.description      = "词语听力题(点击题面播放音频)"//this.getList(data[0]);
               pbl.descriptionSound = pathPreffix + pathSeparator + "type" + String(type) + pathSeparator + "test" + id + pathSeparator + "sound" + pathSeparator + "test" + id + ".mp3";
 
               pbl.descriptionTokenized = null;
