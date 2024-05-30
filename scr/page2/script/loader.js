@@ -379,6 +379,14 @@ class feController {
   }
 
   static submitAnswer() {
+    var modalJump = document.getElementById("myModalJump");
+    var btn_again_jump = document.getElementById("btn_again_jump");
+    var btn_enter_jump = document.getElementById("btn_enter_jump");
+    var modal = document.getElementById("myModal");
+    var btn_enter = document.getElementById("btn_enter");
+    var modalTitleElement = document.querySelector(".modal-title");
+    var modalTitleElement1 = document.querySelector(".modal-title1");
+
     if (feController.checkAnswer() == true) {
       logInfo("OK you win");
       if (true) {
@@ -388,6 +396,12 @@ class feController {
           cur_id++;
           localStorage.setItem("levelProgress", cur_id);
           resource.getProblem(lvstt[cur_id][0], lvstt[cur_id][1]);
+
+          modalTitleElement1.textContent = "good job! next question!";
+          modal.style.display = "block";
+          btn_enter.onclick = function () {
+            modal.style.display = "none";
+          };
         } else {
           if (
             parseInt(localStorage.getItem("onProcess")) >=
@@ -399,13 +413,45 @@ class feController {
             );
           }
           // jump back.
-          window.location.href = "../page1/index.html";
+
+          modalJump.style.display = "block";
+          modalTitleElement.textContent = "excellent! you win!";
+          btn_enter_jump.onclick = function () {
+            // 返回
+            var url = "../page1/index.html";
+            window.location.href = url;
+          };
+          btn_again_jump.onclick = function () {
+            // 重试
+            var url = "../page2/index.html";
+            window.location.href = url;
+          };
         }
       }
     } else {
       logInfo("OK you lose hahah");
       localStorage.setItem("life", parseInt(localStorage.getItem("life")) - 1);
       feController.count_life();
+      if (parseInt(localStorage.getItem("life")) <= 0) {
+        modalJump.style.display = "block";
+        modalTitleElement.textContent = "ok, you lose! hahah!";
+        btn_enter_jump.onclick = function () {
+          // 返回
+          var url = "../page1/index.html";
+          window.location.href = url;
+        };
+        btn_again_jump.onclick = function () {
+          // 重试
+          var url = "../page2/index.html";
+          window.location.href = url;
+        };
+      } else {
+        modalTitleElement1.textContent = "not right! try again!";
+        modal.style.display = "block";
+        btn_enter.onclick = function () {
+          modal.style.display = "none";
+        };
+      }
     }
   }
 
