@@ -1,114 +1,176 @@
 // include before resource.js
 
 function logInfo(...data) {
-    console.log(data);
+  console.log(data);
 }
-
 
 /* level data */
 
 const levels = [
-    /* 每一行是一关，元素是 [类型, id] */
-    [[1,1],[1,2],[2,1],[3,6],[4,1]],
-    [[4,2],[1,4],[2,2],[3,4]],
-    [[1,5],[2,6],[4,3],[1,7]],
-    [[1,9],[2,3],[4,4],[3,3]],
-    [[2,7],[2,10],[1,6],[4,5]],
-    [[4,6],[1,10],[3,2],[4,7]],
-    [[1,8],[4,8],[2,8],[2,9]],
-    [[3,7],[3,8],[3,9],[3,10]],    //刚好是四句上下文,还挺有意思
-    [[1,3],[2,4],[2,5],[4,9]],
-    [[3,1],[3,5],[4,10]]
+  /* 每一行是一关，元素是 [类型, id] */
+  [
+    [1, 1],
+    [1, 2],
+    [2, 1],
+    [3, 6],
+    [4, 1],
+  ],
+  [
+    [4, 2],
+    [1, 4],
+    [2, 2],
+    [3, 4],
+  ],
+  [
+    [1, 5],
+    [2, 6],
+    [4, 3],
+    [1, 7],
+  ],
+  [
+    [1, 9],
+    [2, 3],
+    [4, 4],
+    [3, 3],
+  ],
+  [
+    [2, 7],
+    [2, 10],
+    [1, 6],
+    [4, 5],
+  ],
+  [
+    [4, 6],
+    [1, 10],
+    [3, 2],
+    [4, 7],
+  ],
+  [
+    [1, 8],
+    [4, 8],
+    [2, 8],
+    [2, 9],
+  ],
+  [
+    [3, 7],
+    [3, 8],
+    [3, 9],
+    [3, 10],
+  ], //刚好是四句上下文,还挺有意思
+  [
+    [1, 3],
+    [2, 4],
+    [2, 5],
+    [4, 9],
+  ],
+  [
+    [3, 1],
+    [3, 5],
+    [4, 10],
+  ],
 ];
 
-function arrToStr (arr) {
-    var ret = "";
-    for (let i = 0; i < arr.length; i++) {
-        ret = ret + arr[i][0] + ":" + arr[i][1];
-        if (i + 1 < arr.length) {
-            ret = ret + ",";
-        }
+function arrToStr(arr) {
+  var ret = "";
+  for (let i = 0; i < arr.length; i++) {
+    ret = ret + arr[i][0] + ":" + arr[i][1];
+    if (i + 1 < arr.length) {
+      ret = ret + ",";
     }
-    return ret;
+  }
+  return ret;
 }
 
-function strToArr (str) {
-    var ret = [];
-    str = str.split(",");
-    for (let i = 0; i < str.length; i++) {
-        ret.push(Array(parseInt(str[i].split(":")[0]),parseInt(str[i].split(":")[1])));
-    }
-    return ret;
+function strToArr(str) {
+  var ret = [];
+  str = str.split(",");
+  for (let i = 0; i < str.length; i++) {
+    ret.push(
+      Array(parseInt(str[i].split(":")[0]), parseInt(str[i].split(":")[1]))
+    );
+  }
+  return ret;
 }
 
-function getRandomizedPermutation (len) {
-    
-    logInfo("getRandomizedPermutation()", len);
-    arr = Array();
-    for (let i = 0; i < len; i++) {
-        arr.push(i);
-    }
-    for (var i = arr.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
+function getRandomizedPermutation(len) {
+  logInfo("getRandomizedPermutation()", len);
+  arr = Array();
+  for (let i = 0; i < len; i++) {
+    arr.push(i);
+  }
+  for (var i = arr.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
 }
 
-function shuffleWithGivenOrder (arr, order) {
-    logInfo("shuffleWithGivenOrder()", arr, order);
-    ret = Array();
-    for (let i = 0; i < arr.length; i++) {
-        ret.push(arr[order[i]]);
-    }
-    return ret;
+function shuffleWithGivenOrder(arr, order) {
+  logInfo("shuffleWithGivenOrder()", arr, order);
+  ret = Array();
+  for (let i = 0; i < arr.length; i++) {
+    ret.push(arr[order[i]]);
+  }
+  return ret;
 }
 
-if (localStorage.getItem("onProcess") == undefined) { localStorage.setItem("onProcess", 1); }
-if (localStorage.getItem("maxProcess") == undefined) { localStorage.setItem("maxProcess", 1); }
-localStorage.setItem("levelStat", arrToStr(levels[localStorage.getItem("onProcess") - 1]));
+if (localStorage.getItem("onProcess") == undefined) {
+  localStorage.setItem("onProcess", 1);
+}
+if (localStorage.getItem("maxProcess") == undefined) {
+  localStorage.setItem("maxProcess", 1);
+}
+localStorage.setItem(
+  "levelStat",
+  arrToStr(levels[localStorage.getItem("onProcess") - 1])
+);
 localStorage.setItem("levelProgress", 0);
 
 /*  - interface -  */
 
 function initPage(problem) {
-    ; // BlankFillingProblem problem
-    feController.init(problem);
+  // BlankFillingProblem problem
+  feController.init(problem);
 }
 
 class problem {
-    type;             //int 题型
-    description;      //string 题面
-    descriptionSound; //type(1-3) : string src路径 type(4):null(这个题型没声音)
+  type; //int 题型
+  description; //string 题面
+  descriptionSound; //type(1-3) : string src路径 type(4):null(这个题型没声音)
 
-    descriptionTokenized; // string [] 题面（按字分开）
-    descriptionIPA;       // string [] 音标（按字分开）
+  descriptionTokenized; // string [] 题面（按字分开）
+  descriptionIPA; // string [] 音标（按字分开）
 
-    wordList;         //string [] 选项名字
-    wordIPAList       //string [] 音标
-    wordSoundList;    //string [] src路径(与wordList一一对应)
-    answer;           //string 答案
+  wordList; //string [] 选项名字
+  wordIPAList; //string [] 音标
+  wordSoundList; //string [] src路径(与wordList一一对应)
+  answer; //string 答案
 }
 
-
-
 class feController {
-    static thisProblem;
-    static thisWordBlank;
-    static isStaticButtonInitialized;
-    static init(problem) {
-        logInfo("init()", problem);
-        ; // BlankFillingProblem problem
-        this.thisProblem = problem;
-        this.clear();
-        if(this.thisProblem.description != undefined) this.showStatement(this.thisProblem.description);
+  static thisProblem;
+  static thisWordBlank;
+  static isStaticButtonInitialized;
+  static init(problem) {
+    logInfo("init()", problem); // BlankFillingProblem problem
+    this.getMessage();
+    this.thisProblem = problem;
+    this.clear();
+    if (this.thisProblem.description != undefined)
+      this.showStatement(this.thisProblem.description);
 
-        this.shuffleOptionList();
-        this.showOptionList(this.thisProblem.wordList);
+    this.shuffleOptionList();
+    this.showOptionList(this.thisProblem.wordList);
 
-        this.loadAllSound();
+    this.loadAllSound();
 
         if(!this.isStaticButtonInitialized) this.attachListener();
+    }
+    static getMessage() {
+      var message = document.querySelector(".navMessage");
+      var lev = localStorage.getItem("onProcess");
+      var step = localStorage.getItem("levelProgress") + 1;
+      message.innerText = "关卡" + lev + " 第" + step + "题";
     }
     static clear() {
         logInfo("clear()");
@@ -202,16 +264,16 @@ class feController {
         music.play();
     }
 
-    static loadAllSound() {
-        if (this.isHaveOptionSound()) {
-            for (var i = 0; i < this.thisProblem.wordSoundList.length; i++) {
-                var tmp = new Audio(this.thisProblem.wordSoundList[i]);
-            }
-        }
-        if (this.isHaveStatementSound()) {
-            var tmp = new Audio(this.thisProblem.descriptionSound);
-        }
+  static loadAllSound() {
+    if (this.isHaveOptionSound()) {
+      for (var i = 0; i < this.thisProblem.wordSoundList.length; i++) {
+        var tmp = new Audio(this.thisProblem.wordSoundList[i]);
+      }
     }
+    if (this.isHaveStatementSound()) {
+      var tmp = new Audio(this.thisProblem.descriptionSound);
+    }
+  }
 
     static attachListener() {
         this.isStaticButtonInitialized = true;
@@ -229,11 +291,18 @@ class feController {
                 feController.playStatementSound();
             }
         }, true);
-        document.getElementById("ai_btn").addEventListener("click", function() {
+        document.querySelector(".navSubContainer").addEventListener(
+            "click",
+            function () {
+              window.location.href = "../page1/index.html";
+            },
+            true
+          );
+          document.getElementById("ai_btn").addEventListener("click", function() {
             feController.askAI(document.getElementById("ai_input").value);
         }, true);
     }
-    
+
     static askAI(msg) {
         queryAI(msg, document.getElementById("ai_result"),
             (dom)=>{
@@ -259,77 +328,85 @@ class feController {
         document.getElementById("ai_result").appendChild(tempDOM);
     }
 
-    static submitAnswer() {
-        if (feController.checkAnswer() == true) {
-            logInfo("OK you win");
-            if (true) {
-                var lvstt = strToArr(localStorage.getItem("levelStat"));
-                var cur_id = parseInt(localStorage.getItem("levelProgress"));
-                if (cur_id + 1 < lvstt.length) {
-                    cur_id ++;
-                    localStorage.setItem("levelProgress", cur_id);
-                    resource.getProblem(lvstt[cur_id][0],lvstt[cur_id][1]);
-                } else {
-                    if (parseInt(localStorage.getItem("onProcess")) >= parseInt(localStorage.getItem("maxProcess"))) {
-                        localStorage.setItem("maxProcess", parseInt(localStorage.getItem("onProcess")) + 1);
-                    }
-                    // jump back.
-                    window.location.href = "../page1/index.html";
-                }
-            }
+  static submitAnswer() {
+    if (feController.checkAnswer() == true) {
+      logInfo("OK you win");
+      if (true) {
+        var lvstt = strToArr(localStorage.getItem("levelStat"));
+        var cur_id = parseInt(localStorage.getItem("levelProgress"));
+        if (cur_id + 1 < lvstt.length) {
+          cur_id++;
+          localStorage.setItem("levelProgress", cur_id);
+          resource.getProblem(lvstt[cur_id][0], lvstt[cur_id][1]);
         } else {
-            logInfo("OK you lose hahah");
+          if (
+            parseInt(localStorage.getItem("onProcess")) >=
+            parseInt(localStorage.getItem("maxProcess"))
+          ) {
+            localStorage.setItem(
+              "maxProcess",
+              parseInt(localStorage.getItem("onProcess")) + 1
+            );
+          }
+          // jump back.
+          window.location.href = "../page1/index.html";
         }
+      }
+    } else {
+      logInfo("OK you lose hahah");
     }
+  }
 
-    static isHaveOptionIPA() {
-        if (this.thisProblem.type == 1) return true;
-        if (this.thisProblem.type == 2) return false;
-        if (this.thisProblem.type == 3) return false;
-        if (this.thisProblem.type == 4) return false;
+  static isHaveOptionIPA() {
+    if (this.thisProblem.type == 1) return true;
+    if (this.thisProblem.type == 2) return false;
+    if (this.thisProblem.type == 3) return false;
+    if (this.thisProblem.type == 4) return false;
+  }
+
+  static isHaveStatementIPA() {
+    if (this.thisProblem.type == 1) return false;
+    if (this.thisProblem.type == 2) return true;
+    if (this.thisProblem.type == 3) return false;
+    if (this.thisProblem.type == 4) return false;
+  }
+
+  static isHaveOptionSound() {
+    if (this.thisProblem.type == 1) return true;
+    if (this.thisProblem.type == 2) return false;
+    if (this.thisProblem.type == 3) return false;
+    if (this.thisProblem.type == 4) return false;
+  }
+
+  static isHaveStatementSound() {
+    if (this.thisProblem.type == 1) return false;
+    if (this.thisProblem.type == 2) return true;
+    if (this.thisProblem.type == 3) return true;
+    if (this.thisProblem.type == 4) return false;
+  }
+
+  static beClearAnswer() {
+    this.thisWordBlank = Array();
+  }
+
+  static beAddAnswer(word) {
+    this.thisWordBlank.push(word);
+  }
+
+  static beDeleteAnswer(word) {
+    this.thisWordBlank = this.thisWordBlank.filter((name) => {
+      return name != word;
+    });
+    // 选项互不相同
+}
+
+
+  static checkAnswer() {
+    var ret = "";
+    for (let i = 0; i < this.thisWordBlank.length; i++) {
+      ret += this.thisWordBlank[i];
     }
-
-    static isHaveStatementIPA() {
-        if (this.thisProblem.type == 1) return false;
-        if (this.thisProblem.type == 2) return true;
-        if (this.thisProblem.type == 3) return false;
-        if (this.thisProblem.type == 4) return false;
-    }
-
-    static isHaveOptionSound() {
-        if (this.thisProblem.type == 1) return true;
-        if (this.thisProblem.type == 2) return false;
-        if (this.thisProblem.type == 3) return false;
-        if (this.thisProblem.type == 4) return false;
-    }
-
-    static isHaveStatementSound() {
-        if (this.thisProblem.type == 1) return false;
-        if (this.thisProblem.type == 2) return true;
-        if (this.thisProblem.type == 3) return true;
-        if (this.thisProblem.type == 4) return false;
-    }
-
-    static beClearAnswer() {
-        this.thisWordBlank = Array();
-    }
-
-    static beAddAnswer(word) {
-        this.thisWordBlank.push(word);
-    }
-
-    static beDeleteAnswer(word) {
-        this.thisWordBlank = this.thisWordBlank.filter(name => {return name != word});
-        // 选项互不相同
-    }
-
-
-    static checkAnswer() {
-        var ret = "";
-        for (let i = 0; i < this.thisWordBlank.length; i++) {
-            ret += this.thisWordBlank[i];
-        }
-        if (ret == this.thisProblem.answer) return true;
-        else return false;
-    }
+    if (ret == this.thisProblem.answer) return true;
+    else return false;
+  }
 }
