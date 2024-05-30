@@ -32,9 +32,57 @@ nav{
     background: #ffeeee; /* TBD */
 }
 
-.boxStatement{
+.boxStatement {
     font-size: 40px;
     font-family: "GenWanMin";
+    display: flex;
+    flex-direction: column;
+}
+
+.statementContainer {
+    flex: 1;
+}
+
+.xinghuo {
+    flex: 1.65;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+}
+
+
+#sendVal {
+    width: 100%;
+    height: auto;
+    justify-content: space-around;
+    margin: 5px 15px;
+}
+
+#sendVal #question {
+    width: 70%;
+    height: 90%;
+    border: 2px dotted blue;
+}
+
+#sendVal #btn {
+    width: 20%;
+    height: 100%;
+    background-color: #5D7CFF;
+}
+
+#results {
+    width: 100%;
+    height: 100%;
+}
+
+#results #result {
+    align-self: center;
+    width: 92%;
+    height: 90%;
+    margin: 10px 15px;
+
+    background-color: #E2EEFF;
+    white-space: pre-line;
 }
 
 .boxAO{
