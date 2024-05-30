@@ -169,7 +169,7 @@ class feController {
     static getMessage() {
       var message = document.querySelector(".navMessage");
       var lev = localStorage.getItem("onProcess");
-      var step = localStorage.getItem("levelProgress") + 1;
+      var step = parseInt(localStorage.getItem("levelProgress")) + 1;
       message.innerText = "关卡" + lev + " 第" + step + "题";
     }
     static clear() {
