@@ -12,10 +12,36 @@ body{
     margin: 0px;
 }
 
-nav{
-    /* TBD: 完全不知道搞点啥 */
-    margin: 10px;
-    background-color: #44aaff; /* TBD */
+.navContainer{
+    background-color: #700ab4;
+    margin: 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navSubContainer{
+    background: #52146e;
+    margin: 5px 10px;
+    border-radius: 10%;
+}
+
+.navSubContainer:hover{
+    background-color: #5f0c46;
+}
+
+.navBack {
+    color: white;
+    font-size: 30px;
+    margin: 10px 30px;
+    font-weight: normal;
+}
+
+.navMessage{
+    color: white;
+    font-size: 30px;
+    margin: 10px 30px;
+    font-weight: normal;
 }
 
 .appContainer{
@@ -24,6 +50,7 @@ nav{
     flex-wrap: wrap;
     display: -webkit-flex; /* safari */
 }
+
 
 .subboxApp{
     border: 1px dashed black; /* TBD */
